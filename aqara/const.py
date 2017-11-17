@@ -9,10 +9,10 @@ LISTEN_PORT = 9898
 GATEWAY_PORT = 9898
 
 AQARA_DEVICE_HT = 'sensor_ht'
-AQARA_DEVICE_HT1= 'weather.v1'
+AQARA_DEVICE_HT1 = 'weather.v1'
 AQARA_DEVICE_MOTION = 'motion'
 AQARA_DEVICE_MAGNET = 'magnet'
-AQARA_DEVICE_MAGNET2= 'sensor_magnet.aq2'
+AQARA_DEVICE_MAGNET2 = 'sensor_magnet.aq2'
 AQARA_DEVICE_SWITCH = 'switch'
 AQARA_DEVICE_GATEWAY = 'gateway'
 
