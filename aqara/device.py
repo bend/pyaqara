@@ -8,9 +8,11 @@ from aqara.const import (
     AQARA_DEVICE_HT,
     AQARA_DEVICE_HT1,
     AQARA_DEVICE_MOTION,
+    AQARA_DEVICE_MOTION2,
     AQARA_DEVICE_MAGNET,
     AQARA_DEVICE_MAGNET2,
     AQARA_DEVICE_SWITCH,
+    AQARA_DEVICE_SWITCH2,
     AQARA_SWITCH_ACTION_CLICK,
     AQARA_SWITCH_ACTION_DOUBLE_CLICK,
     AQARA_SWITCH_ACTION_LONG_CLICK_PRESS,
@@ -38,11 +40,11 @@ def create_device(gateway, model, sid):
     """Device factory"""
     if model == AQARA_DEVICE_HT or model == AQARA_DEVICE_HT1:
         return AqaraHTSensor(gateway, sid)
-    elif model == AQARA_DEVICE_MOTION:
+    elif model == AQARA_DEVICE_MOTION or model == AQARA_DEVICE_MOTION2:
         return AqaraMotionSensor(gateway, sid)
     elif model == AQARA_DEVICE_MAGNET or model == AQARA_DEVICE_MAGNET2:
         return AqaraContactSensor(gateway, sid)
-    elif model == AQARA_DEVICE_SWITCH:
+    elif model == AQARA_DEVICE_SWITCH or model == AQARA_DEVICE_SWITCH2:
         return AqaraSwitchSensor(gateway, sid)
     else:
         raise RuntimeError('Unsupported device type: {} [{}]'.format(model, sid))
