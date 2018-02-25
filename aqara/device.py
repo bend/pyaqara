@@ -13,6 +13,7 @@ from aqara.const import (
     AQARA_DEVICE_MAGNET2,
     AQARA_DEVICE_SWITCH,
     AQARA_DEVICE_SWITCH2,
+    AQARA_DEVICE_PLUG,
     AQARA_SWITCH_ACTION_CLICK,
     AQARA_SWITCH_ACTION_DOUBLE_CLICK,
     AQARA_SWITCH_ACTION_LONG_CLICK_PRESS,
@@ -46,6 +47,8 @@ def create_device(gateway, model, sid):
         return AqaraContactSensor(gateway, sid)
     elif model == AQARA_DEVICE_SWITCH or model == AQARA_DEVICE_SWITCH2:
         return AqaraSwitchSensor(gateway, sid)
+    elif model == AQARA_DEVICE_PLUG:
+        return AqaraPlugDevice(gateway, sid)
     else:
         raise RuntimeError('Unsupported device type: {} [{}]'.format(model, sid))
 
@@ -231,3 +234,18 @@ class AqaraSwitchSensor(AqaraBaseDevice):
                 self._action = BUTTON_ACTION_MAP[status]
             else:
                 self.log_warning('invalid status: {}' % status)
+
+class AqaraPlugDevice(AqaraBaseDevice):
+    """AqaraPlugDevice"""
+    def __init__(self, gateway, sid):
+        super().__init__(AQARA_DEVICE_PLUG, gateway, sid)
+        self._action = None
+
+    @property
+    def action(self):
+        """property: last_action"""
+        return self._action
+
+    def do_update(self, data):
+        print(data)
+

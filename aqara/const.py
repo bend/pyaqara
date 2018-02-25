@@ -17,6 +17,7 @@ AQARA_DEVICE_MAGNET2 = 'sensor_magnet.aq2'
 AQARA_DEVICE_SWITCH = 'switch'
 AQARA_DEVICE_SWITCH2 = 'sensor_switch.aq2'
 AQARA_DEVICE_GATEWAY = 'gateway'
+AQARA_DEVICE_PLUG = 'plug'
 
 AQARA_SWITCH_ACTION_CLICK = 'click'
 AQARA_SWITCH_ACTION_DOUBLE_CLICK = 'double_click'
