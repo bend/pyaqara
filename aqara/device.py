@@ -13,6 +13,7 @@ from aqara.const import (
     AQARA_DEVICE_MAGNET2,
     AQARA_DEVICE_SWITCH,
     AQARA_DEVICE_SWITCH2,
+    AQARA_DEVICE_SWITCH3,
     AQARA_DEVICE_PLUG,
     AQARA_SWITCH_ACTION_CLICK,
     AQARA_SWITCH_ACTION_DOUBLE_CLICK,
@@ -45,7 +46,7 @@ def create_device(gateway, model, sid):
         return AqaraMotionSensor(gateway, sid)
     elif model == AQARA_DEVICE_MAGNET or model == AQARA_DEVICE_MAGNET2:
         return AqaraContactSensor(gateway, sid)
-    elif model == AQARA_DEVICE_SWITCH or model == AQARA_DEVICE_SWITCH2:
+    elif model == AQARA_DEVICE_SWITCH or model == AQARA_DEVICE_SWITCH2 or model == AQARA_DEVICE_SWITCH3:
         return AqaraSwitchSensor(gateway, sid)
     elif model == AQARA_DEVICE_PLUG:
         return AqaraPlugDevice(gateway, sid)
@@ -230,6 +231,7 @@ class AqaraSwitchSensor(AqaraBaseDevice):
     def do_update(self, data):
         if AQARA_DATA_STATUS in data:
             status = data[AQARA_DATA_STATUS]
+            print(status)
             if status in BUTTON_ACTION_MAP:
                 self._action = BUTTON_ACTION_MAP[status]
             else:
@@ -248,4 +250,25 @@ class AqaraPlugDevice(AqaraBaseDevice):
 
     def do_update(self, data):
         print(data)
+
+    def turn_on(self):
+        data = {
+                "status": 'on'
+                }
+        meta = {
+                "short_id": 0,
+                "key": 8
+                }
+        self._gateway.write_device(self, data, meta)
+    
+    def turn_off(self):
+        data = {
+                "status": 'off'
+                }
+        meta = {
+                "short_id": 0,
+                "key": 8
+                }
+        self._gateway.write_device(self, data, meta)
+
 
